@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Vmart from './pages/Vmart';
+import Sabbir from './pages/Sabbir';
+import Hossain from './pages/Hossain';
+import Amran from './pages/Amran';
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Fragment>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path='/vmart' element={<Vmart/>} />
+          <Route path='/sabbir' element={<Sabbir/>} />
+          <Route path='/hossain' element={<Hossain/>} />
+          <Route path='/amran' element={<Amran />} />
+        </Routes>
+        
+      </Fragment>
+    </Router>
   );
 }
 

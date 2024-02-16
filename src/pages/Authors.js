@@ -8,8 +8,8 @@ export default function Authors() {
                     Authors
                     </h1>
                 <ul>
-                    <li><Link to="/vmart" >Vmart</Link></li>
-                    <li><Link to="/hossain">Hosain</Link></li>
+                    <li><Link to="/vmart" >Victor Martinez</Link></li>
+                    <li><Link to="/hossain">Istiaque Hossain </Link></li>
                     <li><Link to="/amran">Amran</Link></li>
                     <li><Link to="/sabbir">Sabbir</Link> </li>
                 </ul>

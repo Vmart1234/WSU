@@ -11,7 +11,7 @@ export default function Authors() {
                     <li><Link to="/vmart" >Victor Martinez</Link></li>
                     <li><Link to="/hossain">Istiaque Hossain </Link></li>
                     <li><Link to="/amran">Amran</Link></li>
-                    <li><Link to="/sabbir">Sabbir</Link> </li>
+                    <li><Link to="/sabbir"> Sabbir Ahmed</Link> </li>
                 </ul>
             
              

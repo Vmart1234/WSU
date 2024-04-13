@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { useAuthentication } from "./Hooks/Auth";
-const supabase = createClient(process.env.REACT_APP_URL, process.env.REACT_APP_ANON_KEY)
-
+import supabase from "../../supbase";
+import Data from "../Data/Data";
 function Todo() {
     const { session, handleLogout } = useAuthentication();
     if (!session) {
@@ -28,6 +28,7 @@ function Todo() {
       return (
         <div className="font-mono">
           <button className="bg-white text-black  py-2 px-4 border border-black rounded " onClick={handleLogout}>Logout</button>
+          <Data/>
         </div>
       )
     }

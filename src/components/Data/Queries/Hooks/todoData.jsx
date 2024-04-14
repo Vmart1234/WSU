@@ -1,12 +1,34 @@
 import { useState, useEffect } from 'react';
 import supabase from '../../../../supbase';
-export function useToDo() {
+import { queryOne, queryTwo, queryThree, queryFour ,queryFive} from '../queries';
+export function useToDo(option) {
     const [snapShot, setSnapShot] = useState(null);
-    const fetchData = async() =>{
-        const { data } = await supabase.from('countries').select('*');
-        setSnapShot(data)
+    let query = null
+    const fetchData = async()=>{
+        switch(option) {
+            case 1:
+                query = await queryOne()
+                break;
+            case 2:
+                query = await queryTwo()
+                break;
+            case 3:
+                query = await queryThree()
+                break;
+            case 4:
+                query = await queryFour()
+                break;
+            case 5:
+                const today= new Date()
+                query = await queryFive(today)
+                break;
+            default:
+                console.log("Invalid option");
+        }
+           
+        setSnapShot(query)
     }
-  
+    
     useEffect(() => {
         fetchData()
         const allChanges =  supabase
@@ -16,13 +38,13 @@ export function useToDo() {
             {
             event: '*',
             schema: 'public',
-            table:'countries'
+            table:'tasks'
             },
             (payload) => fetchData() //payload.new
         )
         .subscribe()
         return () => allChanges.unsubscribe();
-}, []);
+}, [option]);
 
-    return snapShot;
+    return [snapShot, setSnapShot];
 };

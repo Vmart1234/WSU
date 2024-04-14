@@ -27,11 +27,11 @@ function Todo() {
             {/* <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} providers={['google']}      /> */}
         
         {/* </div> */}
-        <div className="md:grid md:grid-cols-1 lg:grid-cols-5 ">
-          <div className="flex  mb-5 ">
+        <div className="md:grid md:grid-cols-4 lg:grid-cols-4 ">
+          <div className="flex  mb-5 md:col-span-1 lg:col-span-1 md:mr-5 ">
               <TaskForm />
           </div>
-          <div className="md:ml-5  ">
+          <div className="  md:col-span-3 lg:col-span-3 ">
               <Options handleChange={handleChange} option={option}/>
               
                 <Data option={option}/>

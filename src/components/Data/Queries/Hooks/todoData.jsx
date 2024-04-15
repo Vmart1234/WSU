@@ -49,7 +49,7 @@ export function useToDo(option, filter) {
         )
         .subscribe()
         return () => allChanges.unsubscribe();
-}, [option]);
+}, [option, filter]);
 
     return [snapShot, setSnapShot];
 };

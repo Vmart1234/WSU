@@ -21,6 +21,7 @@ export function useToDo(option) {
             case 5:
                 const today= new Date()
                 query = await queryFive(today)
+                console.log('fucking')
                 break;
             default:
                 console.log("Invalid option");

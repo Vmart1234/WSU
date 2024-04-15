@@ -33,7 +33,7 @@ function Todo() {
           </div>
           <div className="  md:col-span-3 lg:col-span-3 ">
               <Options handleChange={handleChange} option={option}/>
-              
+           
                 <Data option={option}/>
 
 

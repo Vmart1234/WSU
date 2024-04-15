@@ -59,14 +59,13 @@ export  const queryTwo = async() =>{
         desiredDate = new Date(desiredDate)
       
         const { data, error } = await supabase
-        .from('tasks')
-        .select('*')
-        .eq('status', 'completed')
-        .gte('due_date', `${desiredDate.toISOString().slice(0, 10)}T00:00:00`)
-        .lt('due_date', `${new Date(desiredDate.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)}T23:59:59`)
+        
+      .from('tasks')
+      .select('*')
+      .gte('completed_at', new Date(new Date(desiredDate).getTime() - 6 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)); 
 
+     console.log( new Date(new Date(desiredDate).getTime() - 6 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10))
      
-        .order('due_date');
      
 
         if (error) console.error(error);

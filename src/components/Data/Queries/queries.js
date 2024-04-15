@@ -70,7 +70,7 @@ export  const queryTwo = async(filter) =>{
       categories (id, category_name)`)
       .gte('completed_at', new Date(new Date(desiredDate).getTime() - 6 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)); 
 
-     console.log( new Date(new Date(desiredDate).getTime() - 6 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10))
+        console.log( new Date(new Date(desiredDate).getTime() - 6 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10))
      
      
 

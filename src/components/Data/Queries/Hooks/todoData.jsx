@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import supabase from '../../../../supbase';
 import { queryOne, queryTwo, queryThree, queryFour ,queryFive} from '../queries';
-export function useToDo(option, category) {
+export function useToDo(option, category,date) {
     const [snapShot, setSnapShot] = useState(null);
     let query = null
     
@@ -19,6 +19,7 @@ export function useToDo(option, category) {
                     break;
                 case 4:
                     query = await queryFour()
+                   console.log('trigger')
                     break;
                 case 5:
                     const today= new Date()
@@ -49,7 +50,7 @@ export function useToDo(option, category) {
         )
         .subscribe()
         return () => allChanges.unsubscribe();
-}, [option,  category]);
+}, [option, category]);
 
     return [snapShot, setSnapShot];
 };

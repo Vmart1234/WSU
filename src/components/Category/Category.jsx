@@ -1,7 +1,7 @@
 import { useToDoCategory } from "./Hooks/todoCategory";
 import { useState } from "react";
 import supabase from "../../supbase";
-export default function Category({options, filter,setFilter}){
+export default function Category({options, filter,setFilter, fetchData}){
 
     const [deletes, setDelete] = useState(null)
     const handleFilterChange = (event) => {
@@ -40,12 +40,14 @@ await supabase
     }
     console.log('Category deleted successfully');
   })
-  .catch(error => console.error('Error deleting category:', error));    
+  .catch(error => console.error('Error deleting category:', error));   
+   await fetchData()
   }
       const deleted = async (event) => {
         event.preventDefault();
         deleteCategory()
         setFilter('None')
+       
       }
 
       const [categoryName, setCategoryName] = useState('');
@@ -68,6 +70,7 @@ await supabase
     } else {
       setCategoryName(''); 
     }
+    await fetchData()
   }
     return (
         <>

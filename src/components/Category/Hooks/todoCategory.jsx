@@ -3,8 +3,8 @@ import { useState, useEffect } from "react"
 
 export function useToDoCategory(){
     const [category, setCategory] = useState([])
-    const [filter, setFilter] = useState('None')
-
+    const [filter, setFilter] = useState()
+    const [changes, setChanges] = useState()
 
     const fetchData = async()=>{
         const { data, error } = await supabase
@@ -12,7 +12,7 @@ export function useToDoCategory(){
         .select('*')
         if (error) console.log(error)
         else setCategory(data)
-        }
+     }
         useEffect(() => {
             fetchData()
             const allChanges =  supabase
@@ -27,9 +27,9 @@ export function useToDoCategory(){
                 (payload) => fetchData() //payload.new
             )
             .subscribe()
-            return () => allChanges.unsubscribe();
-    }, [filter, category]);
-    return { category, setCategory, filter, setFilter };
+            return () => allChanges.unsubscribe(); 
+    }, [filter]);
+    return { category, setCategory, filter, setFilter, fetchData };
       
        
     }

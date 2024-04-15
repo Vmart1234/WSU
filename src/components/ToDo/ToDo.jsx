@@ -7,10 +7,18 @@ import { useToDoCategory } from "../Category/Hooks/todoCategory";
 
 function Todo() {
     const [option, setOption] = useState(1);
-    const { category, filter, setFilter } = useToDoCategory();
+    const { category, filter, setFilter,fetchData } = useToDoCategory();
+    const [selectedDate, setSelectedDate] = useState(null);
 
+    const handleDateChange = (e) => {
+      setSelectedDate(e.target.value);
+      
+    };
+  
+  
     const handleChange = (event) => {
         setOption(Number(event.target.value));
+        setSelectedDate(null)
     };
     
     return (
@@ -22,11 +30,15 @@ function Todo() {
                 <div className="md:grid md:grid-cols-4 lg:grid-cols-4 ">
                     <div className="flex mb-5 md:col-span-1 lg:col-span-1 md:mr-5 flex-col">
                         <TaskForm />
-                        <Category options={category} setFilter={setFilter} />
+                        <Category options={category} setFilter={setFilter} fetchData={fetchData} />
                     </div>
                     <div className="md:col-span-3 lg:col-span-3 ">
-                        <Options handleChange={handleChange} option={option} setFilter={setFilter} />
-                        <Data option={option} filter={filter} options={category} />
+                        <Options handleChange={handleChange} option={option} setFilter={setFilter}  selectedDate={selectedDate}
+                        setSelectedDate={setSelectedDate} handleDateChange={handleDateChange}/>
+                        {selectedDate && (
+                       <p>Selected Date: {new Date(selectedDate).toLocaleDateString()}</p>
+                   )}
+                        <Data option={option} filter={filter} options={category} date={selectedDate} />
                     </div>
                 </div>
             </div>

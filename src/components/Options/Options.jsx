@@ -1,4 +1,4 @@
-export default function Options({handleChange,option}){
+export default function Options({handleChange,option ,selectedDate, setSelectedDate, handleDateChange}){
     return(
         <>
         
@@ -25,7 +25,13 @@ export default function Options({handleChange,option}){
             <span class='tooltip rounded  p-1 bg-gray-100 text-blue-500 -mt-8'>Report</span>
             <input  type="radio" value={5} checked={option === 5} onChange={handleChange} /> 
         </div>
-        
+        {option ==5 &&(
+               <div className="">
+               <input type="date" onChange={handleDateChange} />
+                   
+               </div>
+        )}
+     
 
         </div>
 

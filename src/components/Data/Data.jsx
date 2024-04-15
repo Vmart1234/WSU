@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useToDo } from "./Queries/Hooks/todoData";
 import supabase from "../../supbase";
 
-export default function Data({ option, filter, options}) {
-  const [snapshot, setSnapshot] = useToDo(option,options);
+export default function Data({ option, filter, options, date}) {
+  const [snapshot, setSnapshot] = useToDo(option,options,date);
   const [totalSelected, setTotalSelected] = useState(0);
   const [selectAll, setSelectAll] = useState(false);
   const [selectedIds, setSelectedIds] = useState([]);
@@ -166,7 +166,7 @@ export default function Data({ option, filter, options}) {
       
       </div>
       
-    
+      
       {snapshot && (
       <div className="grid md:grid-cols-4 grid-cols-2">
       {filter !== 'None' 

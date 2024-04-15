@@ -197,7 +197,7 @@ function getCategory(task) {
   return task.categories ? task.categories.category_name : null;
 }
 
-function formatDatePlus24Hours(date) {
+function formatDate(date) {
   const newDate = new Date(new Date(date).getTime() + 24 * 60 * 60 * 1000);
   return newDate.toLocaleString();
 }

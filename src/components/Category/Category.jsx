@@ -15,7 +15,7 @@ export default function Category({options, filter,setFilter}){
       };
 
       async function deleteCategory() {
-        const { data,error } = await supabase
+        const { error } = await supabase
           .from('categories')
           .delete()
           .eq('category_name', deletes)
@@ -23,7 +23,7 @@ export default function Category({options, filter,setFilter}){
         if (error) {
           console.log('Error deleting category: ', error)
         } else {
-          console.log('Category deleted successfully: ', data)
+          console.log('Category deleted successfully: ')
         }
       }
       const deleted = async (event) => {
@@ -62,7 +62,7 @@ export default function Category({options, filter,setFilter}){
         <option key={null}value = {null} >None</option>
             {options.map(option => (
             
-            <option key={option.id} value={option.category_name}>{option.category_name}</option>
+            <option key={option.id} value={option.id}>{option.category_name}</option>
             ))}
         </select>
         </div>

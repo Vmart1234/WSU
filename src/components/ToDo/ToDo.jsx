@@ -12,7 +12,7 @@ function Todo() {
     const handleChange = (event) => {
         setOption(Number(event.target.value));
     };
-    console.log(filter)
+    
     return (
         <>
             <div className="mt-20 font-mono">
@@ -26,7 +26,7 @@ function Todo() {
                     </div>
                     <div className="md:col-span-3 lg:col-span-3 ">
                         <Options handleChange={handleChange} option={option} setFilter={setFilter} />
-                        <Data option={option} filter={filter} />
+                        <Data option={option} filter={filter} options={category} />
                     </div>
                 </div>
             </div>

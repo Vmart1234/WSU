@@ -65,7 +65,7 @@ export default function Data({ option, filter, options}) {
     updateSelectedTasks(dataToUpdate);
   };
 
-  const deleteSelectedTasks = () => {
+  const deleteSelectedTasks = async() => {
      try {
      
       const { error } = await supabase

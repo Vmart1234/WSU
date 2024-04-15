@@ -66,7 +66,28 @@ export default function Data({ option, filter, options}) {
   };
 
   const deleteSelectedTasks = () => {
-    updateSelectedTasks({ deleted_at: new Date().toISOString() });
+     try {
+     
+      const { error } = await supabase
+        .from('tasks')
+        .delete()
+        .in('id', selectedIds);
+  
+      if (error) {
+        throw error;
+      }
+  
+      console.log("Tasks deleted successfully!");
+  
+      const updatedSnapshot = snapshot.filter(task => !selectedIds.includes(task.id));
+      setSnapshot(updatedSnapshot);
+  
+     
+      setTotalSelected(0);
+      setSelectedIds([]);
+    } catch (error) {
+      console.error("Error deleting tasks:", error.message);
+    }
   };
 
   const clearTaskCategory = () => {

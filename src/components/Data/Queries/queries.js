@@ -36,6 +36,7 @@ export  const queryTwo = async(filter) =>{
         .from('tasks')
         .select(`*, 
         categories (id, category_name)`)
+        .eq('status', 'active')
         .eq('due_date', new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().slice(0, 10)) 
         .order('priority_level');
      

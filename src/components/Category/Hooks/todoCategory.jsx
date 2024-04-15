@@ -28,7 +28,7 @@ export function useToDoCategory(){
             )
             .subscribe()
             return () => allChanges.unsubscribe();
-    }, [filter]);
+    }, [filter, category]);
     return { category, setCategory, filter, setFilter };
       
        

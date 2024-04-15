@@ -50,8 +50,7 @@ export default function Data({ option, filter, options}) {
         throw error;
       }
       console.log("Tasks updated successfully!");
-      setTotalSelected(0);
-      setSelectedIds([]);
+      deselectAllTasks();
     } catch (error) {
       console.error("Error updating tasks:", error.message);
     }
@@ -66,8 +65,7 @@ export default function Data({ option, filter, options}) {
   };
 
   const deleteSelectedTasks = async() => {
-     try {
-     
+    try {
       const { error } = await supabase
         .from('tasks')
         .delete()
@@ -79,12 +77,7 @@ export default function Data({ option, filter, options}) {
   
       console.log("Tasks deleted successfully!");
   
-      const updatedSnapshot = snapshot.filter(task => !selectedIds.includes(task.id));
-      setSnapshot(updatedSnapshot);
-  
-     
-      setTotalSelected(0);
-      setSelectedIds([]);
+      deselectAllTasks();
     } catch (error) {
       console.error("Error deleting tasks:", error.message);
     }
@@ -92,6 +85,7 @@ export default function Data({ option, filter, options}) {
 
   const clearTaskCategory = () => {
     updateSelectedTasks({ task_category: null });
+    deselectAllTasks();
   };
 
   const updateSelectedTaskCategory = async () => {
@@ -115,13 +109,21 @@ export default function Data({ option, filter, options}) {
       }
   
       console.log("Task category updated successfully!");
-      setTotalSelected(0);
-      setSelectedIds([]);
+      deselectAllTasks();
     } catch (error) {
       console.error("Error updating task category:", error.message);
     }
   };
   
+  const deselectAllTasks = () => {
+    setSelectedIds([]);
+    setTotalSelected(0);
+    if (snapshot) {
+      const updatedSnapshot = snapshot.map(task => ({ ...task, isSelected: false }));
+      setSnapshot(updatedSnapshot);
+    }
+  };
+
   return (
     <>
       <div className="space-y-4 flex flex-col sm:flex-row sm:space-y-0 sm:space-x-4 ">

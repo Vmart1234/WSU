@@ -3,7 +3,7 @@ import { useToDo } from "./Queries/Hooks/todoData";
 import supabase from "../../supbase";
 
 export default function Data({ option, filter, options}) {
-  const [snapshot, setSnapshot] = useToDo(option);
+  const [snapshot, setSnapshot] = useToDo(option,options);
   const [totalSelected, setTotalSelected] = useState(0);
   const [selectAll, setSelectAll] = useState(false);
   const [selectedIds, setSelectedIds] = useState([]);
@@ -65,8 +65,8 @@ export default function Data({ option, filter, options}) {
     updateSelectedTasks(dataToUpdate);
   };
 
-  const deleteSelectedTasks = async () => {
-    try {
+  const deleteSelectedTasks = async() => {
+     try {
      
       const { error } = await supabase
         .from('tasks')
@@ -88,7 +88,7 @@ export default function Data({ option, filter, options}) {
     } catch (error) {
       console.error("Error deleting tasks:", error.message);
     }
-  };
+  }
 
   const clearTaskCategory = () => {
     updateSelectedTasks({ task_category: null });
@@ -205,7 +205,7 @@ function Task({ task, onSelectionChange }) {
           <div><strong>Status:</strong> {task.status}</div>
           <div><strong>Task Category:</strong> {getCategory(task)}</div>
           <div><strong>Task Description:</strong> {task.task_description}</div>
-          <div><strong>Created At:</strong> {formatDate(task.created_at)}</div>
+          <div><strong>Created At:</strong> {new Date(task.created_at).toLocaleString()}</div>
           <div><strong>Due Date:</strong> {formatDate(task.due_date)}</div>
         
         </li>
@@ -219,5 +219,6 @@ function getCategory(task) {
 }
 
 function formatDate(date) {
-  return new Date(date).toLocaleString();
+  const newDate = new Date(new Date(date).getTime() + 24 * 60 * 60 * 1000);
+  return newDate.toLocaleString();
 }

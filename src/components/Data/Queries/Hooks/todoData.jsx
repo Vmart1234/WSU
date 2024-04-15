@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'react';
 import supabase from '../../../../supbase';
 import { queryOne, queryTwo, queryThree, queryFour ,queryFive} from '../queries';
-export function useToDo(option, filter) {
+export function useToDo(option, category) {
     const [snapShot, setSnapShot] = useState(null);
     let query = null
     
     const fetchData = async()=>{
-        if (filter != 'None'){
+        
             switch(option) {
                 case 1:
-                    query = await queryOne(filter)
+                    query = await queryOne()
                     break;
                 case 2:
-                    query = await queryTwo(filter)
+                    query = await queryTwo()
                     break;
                 case 3:
-                    query = await queryThree(filter)
+                    query = await queryThree()
                     break;
                 case 4:
-                    query = await queryFour(filter)
+                    query = await queryFour()
                     break;
                 case 5:
                     const today= new Date()
-                    query = await queryFive(today,filter)
+                    query = await queryFive(today)
                    
                     break;
                 default:
@@ -30,7 +30,7 @@ export function useToDo(option, filter) {
             }
                
             setSnapShot(query)
-        }
+       
     
     }
     
@@ -49,7 +49,7 @@ export function useToDo(option, filter) {
         )
         .subscribe()
         return () => allChanges.unsubscribe();
-}, [option, filter]);
+}, [option,  category]);
 
     return [snapShot, setSnapShot];
 };

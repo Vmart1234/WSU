@@ -15,17 +15,33 @@ export default function Category({options, filter,setFilter}){
       };
 
       async function deleteCategory() {
-        const { error } = await supabase
-          .from('categories')
-          .delete()
-          .eq('category_name', deletes)
-      
-        if (error) {
-          console.log('Error deleting category: ', error)
-        } else {
-          console.log('Category deleted successfully: ')
-        }
-      }
+await supabase
+  .from('tasks')
+  .update({ task_category: null })
+  .eq('task_category', (await supabase.from('categories').select('id').eq('category_name', deletes)).data[0].id)
+  .then(updateResult => {
+    if (updateResult.error) {
+      console.error('Error updating tasks:', updateResult.error.message);
+      return;
+    }
+    console.log('Tasks updated successfully:', updateResult.data);
+  })
+  .catch(error => console.error('Error updating tasks:', error));
+
+
+await supabase
+  .from('categories')
+  .delete()
+  .eq('category_name', deletes)
+  .then(deleteResult => {
+    if (deleteResult.error) {
+      console.error('Error deleting category:', deleteResult.error.message);
+      return;
+    }
+    console.log('Category deleted successfully');
+  })
+  .catch(error => console.error('Error deleting category:', error));    
+  }
       const deleted = async (event) => {
         event.preventDefault();
         deleteCategory()

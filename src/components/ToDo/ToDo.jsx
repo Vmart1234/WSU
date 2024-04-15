@@ -1,64 +1,37 @@
 import { useEffect, useState } from "react";
-
-import { Auth } from '@supabase/auth-ui-react'
-import { ThemeSupa } from '@supabase/auth-ui-shared'
-import { useAuthentication } from "./Hooks/Auth";
-import supabase from "../../supbase";
 import Data from "../Data/Data";
 import TaskForm from "../Submit/Submit";
 import Options from "../Options/Options";
-import { validatePassword } from "firebase/auth";
+import Category from "../Category/Category";
+import { useToDoCategory } from "../Category/Hooks/todoCategory";
+
 function Todo() {
-    //const { session, handleLogout } = useAuthentication();
     const [option, setOption] = useState(1);
+    const { category, filter, setFilter } = useToDoCategory();
 
     const handleChange = (event) => {
-      setOption(Number(event.target.value));
+        setOption(Number(event.target.value));
     };
-    // if (!session) {
-      return (
-      <>
-
-      <div className=" mt-20 font-mono">
-        <h1 className="bold flex justify-center text-4xl">
-          Welcome to ToDos!
-        </h1>
-        {/* <div className=""> */}
-            {/* <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} providers={['google']}      /> */}
-        
-        {/* </div> */}
-        <div className="md:grid md:grid-cols-4 lg:grid-cols-4 ">
-          <div className="flex  mb-5 md:col-span-1 lg:col-span-1 md:mr-5 ">
-              <TaskForm />
-          </div>
-          <div className="  md:col-span-3 lg:col-span-3 ">
-              <Options handleChange={handleChange} option={option}/>
-           
-                <Data option={option}/>
-
-
-
-
-
-
-              
-          </div>
-        </div>
-
-
-      </div>
-      
- 
-      </>
-     )
-    // } else {
-    //   return (
-    //     <div className="font-mono">
-    //       <button className="bg-white text-black  py-2 px-4 border border-black rounded " onClick={handleLogout}>Logout</button>
-    //       <Data/>
-    //     </div>
-    //   )
-    // }
+    console.log(filter)
+    return (
+        <>
+            <div className="mt-20 font-mono">
+                <h1 className="bold flex justify-center text-4xl">
+                    Welcome to ToDos!
+                </h1>
+                <div className="md:grid md:grid-cols-4 lg:grid-cols-4 ">
+                    <div className="flex mb-5 md:col-span-1 lg:col-span-1 md:mr-5 flex-col">
+                        <TaskForm />
+                        <Category options={category} setFilter={setFilter} />
+                    </div>
+                    <div className="md:col-span-3 lg:col-span-3 ">
+                        <Options handleChange={handleChange} option={option} setFilter={setFilter} />
+                        <Data option={option} filter={filter} />
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 }
 
 export default Todo;

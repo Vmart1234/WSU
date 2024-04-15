@@ -36,7 +36,7 @@ const TaskForm = () => {
 
   return (
    <>
-   <div className="flex flex-col w-screen">
+   <div className="flex flex-col w-full">
     <form className='' onSubmit={handleFormSubmit}>
       <div>
         <label>

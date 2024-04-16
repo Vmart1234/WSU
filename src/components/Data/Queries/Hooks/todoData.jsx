@@ -23,7 +23,7 @@ export function useToDo(option, category,date) {
                     break;
                 case 5:
                     const today= new Date()
-                    query = await queryFive(today)
+                    query = await queryFive(date)
                    
                     break;
                 default:

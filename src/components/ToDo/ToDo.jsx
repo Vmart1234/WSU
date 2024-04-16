@@ -38,7 +38,7 @@ function Todo() {
                         <Options handleChange={handleChange} option={option} setFilter={setFilter}  selectedDate={selectedDate}
                         setSelectedDate={setSelectedDate} handleDateChange={handleDateChange}/>
                         {selectedDate && (
-                     <p>{new Date(new Date(selectedDate).getTime() - 6 * 24 * 60 * 60 * 1000).toLocaleDateString()} - {new Date(new Date(selectedDate).getTime() + 1 * 24 * 60 * 60 * 1000).toLocaleDateString()}</p>
+                     <p> {new Date(new Date(selectedDate).getTime() + 1 * 24 * 60 * 60 * 1000).toLocaleDateString()} <span className="text-red-500">&lt;-- Shows if value is within one week of selected date --&gt;</span></p>
 
                    )}
                         <Data option={option} filter={filter} options={category} date={selectedDate} />

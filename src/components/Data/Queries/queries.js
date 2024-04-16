@@ -61,21 +61,27 @@ export  const queryTwo = async(filter) =>{
     }
     
     export  const queryFive = async(desiredDate,filter) =>{
+       
         desiredDate = new Date(desiredDate)
+       
+        if (desiredDate){
+            console.log(desiredDate)
+            const { data, error } = await supabase
+            .from('tasks')
+            .select(`*, 
+            categories (id, category_name)`)
+            .gte('completed_at', new Date(desiredDate).toISOString())
+    .lt('completed_at', new Date(new Date(desiredDate).getTime() + 7 * 24 * 60 * 60 * 1000).toISOString()); 
       
-        const { data, error } = await supabase
+           
+           
+      
+              if (error) console.error(error);
+              else return  data;
+        }
         
-      .from('tasks')
-      .select(`*, 
-      categories (id, category_name)`)
-      .gte('completed_at', new Date(new Date(desiredDate).getTime() - 6 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)); 
+      
 
-        console.log( new Date(new Date(desiredDate).getTime() - 6 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10))
-     
-     
-
-        if (error) console.error(error);
-        else return  data;
         // const { data2, error2 } = await supabase
         // .from('tasks')
         // .select('*')

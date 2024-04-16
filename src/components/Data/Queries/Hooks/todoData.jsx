@@ -3,8 +3,9 @@ import supabase from '../../../../supbase';
 import { queryOne, queryTwo, queryThree, queryFour ,queryFive} from '../queries';
 export function useToDo(option, category,date) {
     const [snapShot, setSnapShot] = useState(null);
+   
     let query = null
-    
+
     const fetchData = async()=>{
         
             switch(option) {
@@ -22,7 +23,7 @@ export function useToDo(option, category,date) {
                    console.log('trigger')
                     break;
                 case 5:
-                    const today= new Date()
+                   
                     query = await queryFive(date)
                    
                     break;
@@ -50,7 +51,7 @@ export function useToDo(option, category,date) {
         )
         .subscribe()
         return () => allChanges.unsubscribe();
-}, [option, category]);
+}, [option, category,date]);
 
     return [snapShot, setSnapShot];
 };

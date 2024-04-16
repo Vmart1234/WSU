@@ -18,9 +18,11 @@ function Todo() {
   
     const handleChange = (event) => {
         setOption(Number(event.target.value));
+       
         setSelectedDate(null)
+        
     };
-    
+   
     return (
         <>
             <div className="mt-20 font-mono">
@@ -36,7 +38,8 @@ function Todo() {
                         <Options handleChange={handleChange} option={option} setFilter={setFilter}  selectedDate={selectedDate}
                         setSelectedDate={setSelectedDate} handleDateChange={handleDateChange}/>
                         {selectedDate && (
-                       <p>Selected Date: {new Date(selectedDate).toLocaleDateString()}</p>
+                     <p>{new Date(new Date(selectedDate).getTime() - 6 * 24 * 60 * 60 * 1000).toLocaleDateString()} - {new Date(new Date(selectedDate).getTime() + 1 * 24 * 60 * 60 * 1000).toLocaleDateString()}</p>
+
                    )}
                         <Data option={option} filter={filter} options={category} date={selectedDate} />
                     </div>

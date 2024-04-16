@@ -207,9 +207,12 @@ function Task({ task, onSelectionChange }) {
           <div><strong>Status:</strong> {task.status}</div>
           <div><strong>Task Category:</strong> {getCategory(task)}</div>
           <div><strong>Task Description:</strong> {task.task_description}</div>
+          <div><strong>Task Prority:</strong> {task.priority_level}</div>
           <div><strong>Created At:</strong> {new Date(task.created_at).toLocaleString()}</div>
           <div><strong>Due Date:</strong> {formatDate(task.due_date)}</div>
-        
+          {task.completed_at &&(
+              <div><strong>Completed At:</strong>{new Date(task.created_at).toLocaleString()}</div>
+          )}
         </li>
       </ul>
     </div>
